@@ -233,7 +233,7 @@ class _FludoGameState extends State<FludoGame> with TickerProviderStateMixin {
         playerPawns.add(SizedBox.expand(
           child: AnimatedBuilder(
             builder: (_, child) => CustomPaint(
-              //data
+                //data
                 painter: PlayersPainter(
                     playerCurrentSpot: //offset
                         _playerAnimList[playerIndex][pawnIndex].value,
@@ -280,7 +280,7 @@ class _FludoGameState extends State<FludoGame> with TickerProviderStateMixin {
       _pawnCurrentStepInfo.add(currentStepInfoList);
       _winnerPawnList.add([]);
     }
-
+    //send player _playerAnimList ectract
     /**
      * Fetch all safe spot rects
      */
@@ -427,7 +427,7 @@ class _FludoGameState extends State<FludoGame> with TickerProviderStateMixin {
                 false; //to discard free turn if he completes the game
           }
         }
-
+        //send pawn info from here
         _changeTurn();
       }
     }
@@ -497,8 +497,10 @@ class _FludoGameState extends State<FludoGame> with TickerProviderStateMixin {
           //to ignore winners
           _currentTurn =
               (_currentTurn + 1) % 4; //change turn after animation completes
+
           if (_winnerPawnList[_currentTurn].length != 4)
             break; //select player if he is not yet a winner
+          //send currnet turn here
         } while (true);
         _straightSixesCounter = 0;
       } else if (_diceOutput != 6)

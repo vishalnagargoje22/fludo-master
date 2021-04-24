@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class DiceNotifier extends ChangeNotifier {
   bool _isRolled = false;
@@ -20,11 +22,21 @@ class DiceNotifier extends ChangeNotifier {
     } while (rollCounter != 5);
 
     _isRolled = true;
-    _generateOutputAndNotify();
+    //send is rolled
+    Firestore.instance
+        .collection('dice_output')
+        .document('HHTdexQBnXGdDVgQCTtN')
+        .updateData({"is_rolled": _isRolled});
   }
 
-  _generateOutputAndNotify() {
+  _generateOutputAndNotify() async {
     _output = 1 + Random().nextInt(6);
+    //send dice output from here
+    //
+    Firestore.instance
+        .collection('dice_output')
+        .document('HHTdexQBnXGdDVgQCTtN')
+        .updateData({"dice_output": _output});
     notifyListeners();
   }
 }
